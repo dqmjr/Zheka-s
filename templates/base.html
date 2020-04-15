@@ -1,0 +1,107 @@
+
+<html>
+    <head>
+        <title>Blog</title>
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    </head>
+    <body>
+        <header>
+            <div >
+                <div class="container" style="display: flex; justify-content: space-between;">
+                    <div>
+
+                        <a href="{% url 'home'  %}" class="p-2 text-dark" >
+                            <img src="http://www.zhekasice.kz/img/logo.png" alt="" style="width: 100px">
+                        </a>
+
+                    </div>
+                    <div>
+                    <h2>
+                        {% if not user.is_authenticated %}
+                           <a href="{% url 'signup_page'  %}" class="btn btn-success btn-lg" style="background-color:#003E85;margin: 10px">Sign Up</a>
+                            <a href="{% url 'login_page'  %}" class="btn btn-success btn-lg" style="background-color:#003E85;margin: 10px">Login</a>
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'profile' %}"class="btn btn-success btn-lg" style="margin: 10px; background-color:#003E85;">Profile</a>
+                            <a href="{% url 'logout'  %}"class="btn btn-outline-danger btn-lg" style="margin: 10px">Logout</a>
+                        {% endif %}
+
+                    </h2>
+                    </div>
+                </div>
+
+                <div class="bg" style="background-color: 53BDD7 ; padding: 30px; margin: 30px  0px; height: 200px">
+                    <h1 style="margin: 0px 100px; text-align: right; color: #FFFFFF">Doner one love <i class="fa fa-heart"></i></h1>
+
+                </div>
+
+
+            </div>
+        </header>
+
+        <div class="jumbotron">
+            <div class="container">
+                <h1 class="display-3 font-bold" style="text-align: center; color: 53BDD7">Menu</h1>
+                    <div style="display: flex; justify-content: space-between;">
+
+                        <div>
+                            {% for cat in categories %}
+                             <a href="{% url 'category' cat.id %}" class="btn btn-outline-info btn-lg" style="margin: 20px 50px">
+                                 {{cat.name}}
+                             </a>
+                        {% endfor %}
+                        </div>
+                        {% if user.is_authenticated %}
+
+                            <div>
+                              <a href="{% url 'new_article' %}" class="btn btn-primary btn-lg">Add new article</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                <DIV STYLE="background-color: #FFFFFF">
+                    {% block content %}
+                    <!-- Content Goes here -->
+                    {% endblock content %}
+                 </DIV>
+            </div>
+        </div>
+
+        <footer class="pt-md-4 my-md-5 border-top">
+                <div class="row">
+                    <div class="col-md" >
+                    <h5>Our address</h5>
+
+                  </div>
+                  <div class="col-md" >
+                    <h5>Doner</h5>
+                    <ul class="list-unstyled">
+                      <li class="text-muted" >Панфилова, 108</li>
+                      <li class="text-muted" >Казыбек би, 98</li>
+                      <li class="text-muted" >Жибек жолы проспект, 106 (Арбат)</li>
+                      <li class="text-muted">Цирк, пр.Абая, 50</li>
+                      <li class="text-muted">Абая, 27</li>
+                      <li class="text-muted">ТРК ADK, Сатпаева, 90</li>
+                    </ul>
+                  </div>
+                  <div class=" col-md">
+                    <h5>Ice cream</h5>
+                    <ul class="list-unstyled">
+                      <li class="text-muted">ТРЦ MegaPark (островок)</li>
+                      <li class="text-muted">ТРЦ MegaPark (кафе)</li>
+                      <li class="text-muted">ТРЦ Москва</li>
+                      <li class="text-muted">ТРЦ Март</li>
+                    </ul>
+                  </div>
+
+                </div>
+            <div class="center" style="text-align: center">
+                <a href="">Back to Top</a>
+            </div>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+{% for article in articles %}
+    <div style="display: flex; justify-content: space-between">
+        <h1 class="display-2 font-italic  text-center">{{article.title}}</h1>
+        <img width="500px" src="{{article.image.url}}" alt="">
+    </div>
+    <p class="display-4 font-italic">{{article.description}}</p>
+    <p class="display-6 mb-1 text-muted" style="text-align: right">{{article.created_on}}</p>
+    <p class="display-4" style="text-align: right">
+
+        {% for tag in article.tags.all %}
+            <span style="margin-right: 20px"> {{ tag.name }}</span>
+        {% endfor %}
+    </p>
+
+    <a class="btn btn-outline-primary mb-4 btn-lg" style="margin: 20px 50px" href="{% url 'delete_article' article.id %}">Delete</a>
+    <a class="btn btn-outline-primary mb-4 btn-lg" style="margin: 20px 50px" href="{% url 'edit_form_article' article.id %}">Edit</a>
+    <hr>
+{% endfor %}
+</div>
+{% comment %}
+
+<form action="comment" method="post">
+    {% csrf_token %}
+    {{form}}
+    <br>
+    <button  type="submit">Save</button>
+</form>
+    <h1>zxcvbnm</h1>
+    {% for com in comment %}
+        <h1 class="display-2 font-italic  text-center">qweqweq</h1>
+        <p class="display-4 font-italic">{{com.user}}</p>
+        <p class="display-4 font-italic">{{com.comment}}</p>
+    {% endfor %}
+{% endcomment %}
+
+{% endblock %}

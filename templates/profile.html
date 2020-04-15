@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+<h1 style="margin: 30px; color: #003E85;"> Name: {{user.first_name }} <br> Last Name: {{user.last_name}} <hr>
+    <h2 style="color: #003E85">Your Posts:</h2>
+    <br></h1>
+
+{% for article in articles %}
+
+<h1><a href="">{{article.title}}</a></h1>
+<p>{{article.description}}</p>
+<p>{{article.created_on}}</p>
+<p>
+    {% for tag in article.tags.all %}
+        <span style="margin-right: 20px"> {{ tag.name }}</span>
+    {% endfor %}
+</p>
+
+<a href="{% url 'delete_article' article.id %}">Delete</a>
+<a href="{% url 'edit_form_article' article.id %}">Edit</a>
+<hr>
+{% endfor %}
+</div>
+
+{% endblock %}
